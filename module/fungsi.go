@@ -76,3 +76,43 @@ func GetAllParfume(db *mongo.Database, col string) (data []model.Parfume) {
 	}
 	return
 }
+
+func UpdateParfume(_id primitive.ObjectID, db *mongo.Database, col string, nama string, jenis string, merk string, deskripsi string, harga int, thn int, stok int, ukuran string) (err error) {
+	filter := bson.M{"_id": _id}
+	update := bson.M{
+		"$set": bson.M{
+			"nama_parfume":    	nama,
+			"jenis_parfume":    jenis,
+			"merk":     		merk,
+			"deskripsi": 		deskripsi,
+			"harga":     		harga,
+			"thn_peluncuran":   thn,
+			"stok":      		stok,
+			"ukuran":      		ukuran,
+		},
+	}
+	result, err :=db.Collection(col).UpdateOne(context.Background(), filter, update)
+	if err != nil {
+		fmt.Printf("UpdateParfume: %v\n", err)
+		return
+	}
+	if result.ModifiedCount == 0 {
+		err = errors.New("no data updated with the specified ID")
+		return
+	}
+	return nil
+}
+
+func DeleteParfumeByID(_id primitive.ObjectID, db *mongo.Database, col string) error {
+	collection := db.Collection(col)
+	filter := bson.M{"_id": _id}
+
+	result, err := collection.DeleteOne(context.TODO(), filter)
+	if err != nil{
+		return fmt.Errorf("error deleting data for ID %s: %s", _id, err.Error())
+	}
+	if result.DeletedCount == 0	{
+		return fmt.Errorf("data with ID %s not found", _id)
+	}
+	return nil
+}
