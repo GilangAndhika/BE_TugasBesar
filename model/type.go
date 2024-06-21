@@ -5,7 +5,7 @@ import (
 	"github.com/dgrijalva/jwt-go"
 )
 
-type parfume struct {
+type Parfume struct {
 	ID				primitive.ObjectID `bson:"_id,omitempty" json:"_id,omitempty" example:"123456789"`
 	Nama_Parfume	string				`bson:"nama_parfume,omitempty" json:"nama_parfume,omitempty" example:"Chirstian Dior"`
 	Jenis_Parfume	string				`bson:"jenis_parfume,omitempty" json:"jenis_parfume,omitempty" example:"Eau de Parfum"`
@@ -17,7 +17,7 @@ type parfume struct {
 	Ukuran			string				`bson:"ukuran,omitempty" json:"ukuran,omitempty" example:"100ml"`
 }
 
-type user struct {
+type User struct {
 	ID				primitive.ObjectID `bson:"_id,omitempty" json:"_id,omitempty" example:"123456789"`
 	Username		string				`bson:"username,omitempty" json:"username,omitempty" example:"user"`
 	Password		string				`bson:"password,omitempty" json:"password,omitempty" example:"user"`
