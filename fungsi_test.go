@@ -26,14 +26,19 @@ func TestInsertParfume(t* testing.T){
 }
 
 func TestGetParfumeFromID(t *testing.T) {
-	id := "667567e5205ea4e14b843204"
-	objectID, err := primitive.ObjectIDFromHex(id)
-	if err != nil {
-		t.Fatalf("error converting id to ObjectID: %v", err)
-	}
-	parfume, err := module.GetParfumeFromID(objectID, module.MongoConn, "parfume")
-	if err != nil {
-		t.Fatalf("error calling GetParfumeFromID: %v", err)
-	}
+    id := "66756b2bb0584a360d9709d8"
+    objectID, err := primitive.ObjectIDFromHex(id)
+    if err != nil {
+        t.Fatalf("Error converting id to ObjectID: %v", err)
+    }
+    parfume, err := module.GetParfumeFromID(objectID, module.MongoConn, "parfume")
+    if err != nil {
+        t.Fatalf("Error calling GetParfumeFromID: %v", err)
+    }
 	fmt.Println(parfume)
+}
+
+func TestGetAllParfume(t *testing.T) {
+	data := module.GetAllParfume(module.MongoConn, "parfume")
+	fmt.Println(data)
 }
