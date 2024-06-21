@@ -2,6 +2,7 @@ package model
 
 import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"github.com/dgrijalva/jwt-go"
 )
 
 type parfume struct {
@@ -23,4 +24,15 @@ type user struct {
 	Email			string				`bson:"email,omitempty" json:"email,omitempty" example:"user"`
 	Phone			string				`bson:"phone,omitempty" json:"phone,omitempty" example:"08123456789"`
 	Address			string				`bson:"address,omitempty" json:"address,omitempty" example:"Jl. Jalan"`
+}
+
+type Roles struct {
+	IdRole int    `gorm:"primaryKey;column:id_role" json:"id_role"`
+	Nama   string `gorm:"column:nama" json:"nama"`
+}
+
+type JWTClaims struct {
+	jwt.StandardClaims
+	IdUser uint `json:"id_user"`
+	IdRole int  `json:"id_role"`
 }

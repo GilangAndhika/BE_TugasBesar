@@ -4,6 +4,7 @@ go 1.22.1
 
 require (
 	github.com/aiteung/atdb v0.1.7
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	go.mongodb.org/mongo-driver v1.11.6
 )
 
