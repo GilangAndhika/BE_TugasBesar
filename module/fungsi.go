@@ -2,7 +2,7 @@ package module
 
 import (
 	"context"
-	// "errors"
+	"errors"
 	"fmt"
 	// "github.com/gryzlegrizz/BE_TugasBesar/model"
 
@@ -48,4 +48,17 @@ func InsertParfume(db *mongo.Database, col string, nama string, jenis string, me
 	}
 	insertedID = result.InsertedID.(primitive.ObjectID)
 	return insertedID, nil
+}
+
+func GetParfumeFromID(_id primitive.ObjectID, db *mongo.Database, col string) (parfume *mongo.Collection, errs error) {
+	parfume = db.Collection(col)
+	filter := bson.M{"_id": _id}
+	err := parfume.FindOne(context.TODO(), filter).Decode(&parfume)
+	if err != nil {
+		if errors.Is(err, mongo.ErrNoDocuments) {
+			return parfume, fmt.Errorf("no data found for ID %s", _id)
+		}
+		return parfume, fmt.Errorf("error retrieving data for ID %s: %s", _id, err.Error())
+	}
+	return parfume, nil
 }
