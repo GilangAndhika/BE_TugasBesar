@@ -5,10 +5,10 @@ import (
 	"os"
 )
 
-var MongoStrinng string =os.Getenv("MONGO_STRING")
+var MongoString string = os.Getenv("MONGOSTRING")
 
 var MongoInfo = atdb.DBInfo{
-	DBString: MongoStrinng,
+	DBString: MongoString,
 	DBName: "dbparfume",
 }
 

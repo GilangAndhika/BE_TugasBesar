@@ -4,14 +4,15 @@ import (
 	"context"
 	"errors"
 	"fmt"
-
 	"github.com/gryzlegrizz/BE_TugasBesar/model"
+
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
+
 
 func MongoConnect(dbname string) (db *mongo.Database) {
 	client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(MongoString))
