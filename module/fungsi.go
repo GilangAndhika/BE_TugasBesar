@@ -31,7 +31,7 @@ func InsertOneDoc(db string, collection string, doc interface{}) (insertedID int
 }
 
 func InsertParfume(db *mongo.Database, col string, nama string, jenis string, merk string, deskripsi string, harga int, thn int, stok int, ukuran string) (insertedID primitive.ObjectID, err error) {
-	presensi := bson.M{
+	parfume := bson.M{
 		"nama_parfume":    	nama,
 		"jenis_parfume":    jenis,
 		"merk":     		merk,
@@ -41,7 +41,7 @@ func InsertParfume(db *mongo.Database, col string, nama string, jenis string, me
 		"stok":      		stok,
 		"ukuran":      		ukuran,
 	}
-	result, err := db.Collection(col).InsertOne(context.Background(), presensi)
+	result, err := db.Collection(col).InsertOne(context.Background(), parfume)
 	if err != nil {
 		fmt.Printf("InsertParfume: %v\n", err)
 		return
