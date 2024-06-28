@@ -170,7 +170,7 @@ func UpdateUser(_id primitive.ObjectID, db *mongo.Database, col string, username
 	return nil
 }
 
-func DeteleUserByID(_id primitive.ObjectID, db *mongo.Database, col string) error {
+func DeleteUserByID(_id primitive.ObjectID, db *mongo.Database, col string) error {
 	collection := db.Collection(col)
 	filter := bson.M{"_id": _id}
 

@@ -124,17 +124,17 @@ func TestUpdateUser(t *testing.T) {
 	fmt.Println("Data berhasil diupdate")
 }
 
-func TestDeleteUserByID(t *testing.T) {
+func TestDeteleUserByID(t *testing.T) {
 	id := "667e684f71fbe2689d38ad23"
 	objectID, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
 		t.Fatalf("Error converting id to ObjectID: %v", err)
 	}
-	err = module.DeleteUserByID(objectID, module.MongoConn, "parfume")
+	err = module.DeleteUserByID(objectID, module.MongoConn, "user")
 	if err != nil {
-		t.Fatalf("Error calling DeleteParfume: %v", err)
+		t.Fatalf("Error calling DeleteUser: %v", err)
 	}
-	_, err = module.GetUserFromID(objectID, module.MongoConn, "parfume")
+	_, err = module.GetUserFromID(objectID, module.MongoConn, "user")
 	if err == nil {
 		t.Fatalf("Data masih ada")
 	}

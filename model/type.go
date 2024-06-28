@@ -26,13 +26,13 @@ type User struct {
 	Address			string				`bson:"address,omitempty" json:"address,omitempty" example:"Jl. Jalan"`
 }
 
-type Roles struct {
-	IdRole int    `gorm:"primaryKey;column:id_role" json:"id_role"`
-	Nama   string `gorm:"column:nama" json:"nama"`
+type Role struct {
+	ID				primitive.ObjectID  `bson:"_id,omitempty" json:"_id,omitempty" example:"123456789"`
+	Role			string				`bson:"role,omitempty" json:"role,omitempty" example:"admin"`
 }
 
 type JWTClaims struct {
 	jwt.StandardClaims
-	IdUser uint `json:"id_user"`
-	IdRole int  `json:"id_role"`
+	UserID			primitive.ObjectID `json:"user_id"`
+	RoleID			primitive.ObjectID `json:"role_id"`
 }
