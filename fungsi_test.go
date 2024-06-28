@@ -124,7 +124,7 @@ func TestUpdateUser(t *testing.T) {
 	fmt.Println("Data berhasil diupdate")
 }
 
-func TestDeteleUserByID(t *testing.T) {
+func TestDeleteUserByID(t *testing.T) {
 	id := "667e684f71fbe2689d38ad23"
 	objectID, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
@@ -138,4 +138,9 @@ func TestDeteleUserByID(t *testing.T) {
 	if err == nil {
 		t.Fatalf("Data masih ada")
 	}
+}
+
+func TestGetAllUser(t *testing.T) {
+	data := module.GetAllUser(module.MongoConn, "user")
+	fmt.Println(data)
 }

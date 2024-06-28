@@ -183,3 +183,17 @@ func DeleteUserByID(_id primitive.ObjectID, db *mongo.Database, col string) erro
 	}
 	return nil
 }
+
+func GetAllUser(db *mongo.Database, col string) (data []model.User) {
+	collection := db.Collection(col)
+	filter := bson.M{}
+	cursor, err := collection.Find(context.TODO(), filter)
+	if err != nil {
+		fmt.Println("GetALLData :", err)
+	}
+	err = cursor.All(context.TODO(), &data)
+	if err != nil {
+		fmt.Println(err)
+	}
+	return
+}
