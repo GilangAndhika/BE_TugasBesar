@@ -116,3 +116,70 @@ func DeleteParfumeByID(_id primitive.ObjectID, db *mongo.Database, col string) e
 	}
 	return nil
 }
+
+func InsertUser(db *mongo.Database, col string, username string, password string, email string, phone string, address string) (insertedID primitive.ObjectID, err error) {
+	user := bson.M{
+		"username": username,
+		"password": password,
+		"email":    email,
+		"phone":    phone,
+		"address":  address,
+	}
+	result, err := db.Collection(col).InsertOne(context.Background(), user)
+	if err != nil {
+		fmt.Printf("InsertUser: %v\n", err)
+		return
+	}
+	insertedID = result.InsertedID.(primitive.ObjectID)
+	return insertedID, nil
+}
+
+func GetUserFromID(_id primitive.ObjectID, db *mongo.Database, col string) (user model.User, errs error) {
+	collection := db.Collection(col)
+	filter := bson.M{"_id": _id}
+	err := collection.FindOne(context.TODO(), filter).Decode(&user)
+	if err != nil {
+		if errors.Is(err, mongo.ErrNoDocuments) {
+			return user, fmt.Errorf("no data found for ID %s", _id)
+		}
+		return user, fmt.Errorf("error retrieving data for ID %s: %s", _id, err.Error())
+	}
+	return user, nil
+}
+
+func UpdateUser(_id primitive.ObjectID, db *mongo.Database, col string, username string, password string, email string, phone string, address string) (err error) {
+	filter := bson.M{"_id": _id}
+	update := bson.M{
+		"$set": bson.M{
+			"username": username,
+			"password": password,
+			"email":    email,
+			"phone":    phone,
+			"address":  address,
+		},
+	}
+	result, err :=db.Collection(col).UpdateOne(context.Background(), filter, update)
+	if err != nil {
+		fmt.Printf("UpdateUser: %v\n", err)
+		return
+	}
+	if result.ModifiedCount == 0 {
+		err = errors.New("no data updated with the specified ID")
+		return
+	}
+	return nil
+}
+
+func DeteleUserByID(_id primitive.ObjectID, db *mongo.Database, col string) error {
+	collection := db.Collection(col)
+	filter := bson.M{"_id": _id}
+
+	result, err := collection.DeleteOne(context.TODO(), filter)
+	if err != nil{
+		return fmt.Errorf("error deleting data for ID %s: %s", _id, err.Error())
+	}
+	if result.DeletedCount == 0	{
+		return fmt.Errorf("data with ID %s not found", _id)
+	}
+	return nil
+}
