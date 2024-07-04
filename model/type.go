@@ -24,6 +24,7 @@ type User struct {
 	Email			string				`bson:"email,omitempty" json:"email,omitempty" example:"user"`
 	Phone			string				`bson:"phone,omitempty" json:"phone,omitempty" example:"08123456789"`
 	Address			string				`bson:"address,omitempty" json:"address,omitempty" example:"Jl. Jalan"`
+	Role 			string				`bson:"role,omitempty" json:"role,omitempty" example:"admin"`
 }
 
 type Role struct {
