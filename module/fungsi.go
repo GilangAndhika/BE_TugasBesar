@@ -97,7 +97,7 @@ func UpdateParfume(_id primitive.ObjectID, db *mongo.Database, col string, nama 
 		return
 	}
 	if result.ModifiedCount == 0 {
-		err = errors.New("no data updated with the specified ID")
+		err = errors.New("No data updated with the specified ID")
 		return
 	}
 	return nil
@@ -197,3 +197,17 @@ func GetAllUser(db *mongo.Database, col string) (data []model.User) {
 	}
 	return
 }
+
+// func BuatToken(db *mongo.Database, col string, token string, username string) (insertedID primitive.ObjectID, err error) {
+// 	user := bson.M{
+// 		"token": token,
+// 		"username": username,
+// 	}
+// 	result, err := db.Collection(col).InsertOne(context.Background(), user)
+// 	if err != nil {
+// 		fmt.Printf("BuatToken: %v\n", err)
+// 		return
+// 	}
+// 	insertedID = result.InsertedID.(primitive.ObjectID)
+// 	return insertedID, nil
+// }

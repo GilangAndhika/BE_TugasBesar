@@ -65,7 +65,7 @@ func TestUpdateParfume(t *testing.T) {
 }
 
 func TestDeleteParfumeByID(t *testing.T) {
-	id := "66756b2bb0584a360d9709d8"
+	id := "66756b6dc9200c67be546f2d"
 	objectID, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
 		t.Fatalf("Error converting id to ObjectID: %v", err)
@@ -76,7 +76,7 @@ func TestDeleteParfumeByID(t *testing.T) {
 	}
 	_, err = module.GetParfumeFromID(objectID, module.MongoConn, "parfume")
 	if err == nil {
-		t.Fatalf("Data masih ada")
+		t.Fatalf("Expected data to be deleted, but it still exists")
 	}
 }
 
