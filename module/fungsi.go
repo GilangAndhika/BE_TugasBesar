@@ -97,7 +97,7 @@ func UpdateParfume(_id primitive.ObjectID, db *mongo.Database, col string, nama 
 		return
 	}
 	if result.ModifiedCount == 0 {
-		err = errors.New("No data updated with the specified ID")
+		err = errors.New("no data updated with the specified ID")
 		return
 	}
 	return nil
@@ -211,7 +211,7 @@ func InsertRole(db *mongo.Database, col string, roleUser string) (insertedID pri
 	return insertedID, nil
 }
 
-func GetRoleFromID(_id primitive.ObjectID, db *mongo.Database, col string) (role model.Role, errs error) {
+func GetRoleFromID(_id primitive.ObjectID, db *mongo.Database, col string) (role model.Roles, errs error) {
 	collection := db.Collection(col)
 	filter := bson.M{"_id": _id}
 	err := collection.FindOne(context.TODO(), filter).Decode(&role)
@@ -257,7 +257,7 @@ func DeleteRoleByID(_id primitive.ObjectID, db *mongo.Database, col string) erro
 	return nil
 }
 
-func GetAllRole(db *mongo.Database, col string) (data []model.Role) {
+func GetAllRole(db *mongo.Database, col string) (data []model.Roles) {
 	collection := db.Collection(col)
 	filter := bson.M{}
 	cursor, err := collection.Find(context.TODO(), filter)
