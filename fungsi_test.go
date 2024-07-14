@@ -80,18 +80,28 @@ func TestDeleteParfumeByID(t *testing.T) {
 	}
 }
 
-func TestInsertUser(t *testing.T){
-	username := "user"
-	password := "user"
-	email := "user"
-	phone := "08123456789"
-	address := "Jl. Jalan"
-	insertedID, err := module.InsertUser(module.MongoConn, "user", username, password, email, phone, address)
-	if err != nil {
-		t.Errorf("Error inserting data: %v", err)
-	}
-	fmt.Printf("Data berhasil disimpan dengan ID: %v\n", insertedID.Hex())
+func TestInsertUser(t *testing.T) {
+    username := "ayala"
+    password := "ayala123"
+    idroleStr := "60d5f483f405e950460b6d50" // Example ObjectID string
+    email := "ayala@gmail.com"
+    phone := "081234567890"
+    address := "Jl. Sukasari"
+
+    idrole, err := primitive.ObjectIDFromHex(idroleStr)
+    if err != nil {
+        t.Errorf("Error converting idrole to ObjectID: %v", err)
+        return
+    }
+
+    insertedID, err := module.InsertUser(module.MongoConn, "user", username, password, idrole, email, phone, address)
+    if err != nil {
+        t.Errorf("Error inserting data: %v", err)
+    } else {
+        fmt.Printf("Data berhasil disimpan dengan ID: %v\n", insertedID.Hex())
+    }
 }
+
 
 func TestGetUserFromID(t *testing.T) {
 	id := "667e684f71fbe2689d38ad23"
@@ -114,18 +124,26 @@ func TestUpdateUser(t *testing.T) {
 	}
 	username := "admin"
 	password := "user"
+	idroleStr := "60d5f483f405e950460b6d50" // Example ObjectID string for role
 	email := "user"
 	phone := "000000000000"
 	address := "Jl. Jalan"
-	err = module.UpdateUser(objectID, module.MongoConn, "user", username, password, email, phone, address)
+	
+	idrole, err := primitive.ObjectIDFromHex(idroleStr)
+	if err != nil {
+		t.Fatalf("Error converting idrole to ObjectID: %v", err)
+	}
+	
+	err = module.UpdateUser(objectID, module.MongoConn, "user", username, password, idrole, email, phone, address)
 	if err != nil {
 		t.Fatalf("Error calling UpdateUser: %v", err)
 	}
 	fmt.Println("Data berhasil diupdate")
 }
 
+
 func TestDeleteUserByID(t *testing.T) {
-	id := "667e684f71fbe2689d38ad23"
+	id := "6693d63641fc4e131110ea5e"
 	objectID, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
 		t.Fatalf("Error converting id to ObjectID: %v", err)

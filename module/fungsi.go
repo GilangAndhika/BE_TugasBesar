@@ -117,10 +117,11 @@ func DeleteParfumeByID(_id primitive.ObjectID, db *mongo.Database, col string) e
 	return nil
 }
 
-func InsertUser(db *mongo.Database, col string, username string, password string, email string, phone string, address string) (insertedID primitive.ObjectID, err error) {
+func InsertUser(db *mongo.Database, col string, username string, password string, idrole primitive.ObjectID, email string, phone string, address string) (insertedID primitive.ObjectID, err error) {
 	user := bson.M{
 		"username": username,
 		"password": password,
+		"idrole":  primitive.NewObjectID(),
 		"email":    email,
 		"phone":    phone,
 		"address":  address,
@@ -147,12 +148,13 @@ func GetUserFromID(_id primitive.ObjectID, db *mongo.Database, col string) (user
 	return user, nil
 }
 
-func UpdateUser(_id primitive.ObjectID, db *mongo.Database, col string, username string, password string, email string, phone string, address string) (err error) {
+func UpdateUser(_id primitive.ObjectID, db *mongo.Database, col string, username string, password string, idrole primitive.ObjectID, email string, phone string, address string) (err error) {
 	filter := bson.M{"_id": _id}
 	update := bson.M{
 		"$set": bson.M{
 			"username": username,
 			"password": password,
+			"idrole":  idrole,
 			"email":    email,
 			"phone":    phone,
 			"address":  address,
@@ -270,6 +272,7 @@ func GetAllRole(db *mongo.Database, col string) (data []model.Roles) {
 	}
 	return
 }
+
 // func BuatToken(db *mongo.Database, col string, token string, username string) (insertedID primitive.ObjectID, err error) {
 // 	user := bson.M{
 // 		"token": token,

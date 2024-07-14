@@ -21,7 +21,7 @@ type User struct {
 	ID         	primitive.ObjectID 	`bson:"_id,omitempty" json:"_id,omitempty" example:"123456789"`
 	Username   	string             	`bson:"username,omitempty" json:"username,omitempty" example:"user"`
 	Password   	string             	`bson:"password,omitempty" json:"password,omitempty" example:"user"`
-	Roles		[]Roles			 	`bson:"roles,omitempty" json:"roles,omitempty"`
+	IDrole		primitive.ObjectID	`bson:"idrole,omitempty" json:"idrole,omitempty" example:"123456789"`
 	Email      	string             	`bson:"email,omitempty" json:"email,omitempty" example:"user"`
 	Phone      	string             	`bson:"phone,omitempty" json:"phone,omitempty" example:"08123456789"`
 	Address    	string             	`bson:"address,omitempty" json:"address,omitempty" example:"Jl. Jalan"`
@@ -29,8 +29,8 @@ type User struct {
 
 
 type Roles struct {
-	ID				primitive.ObjectID  `bson:"_id,omitempty" json:"_id,omitempty" example:"123456789"`
-	Role			string				`bson:"role,omitempty" json:"role,omitempty" example:"admin"`
+	IDrole				primitive.ObjectID  `bson:"_id,omitempty" json:"_id,omitempty" example:"123456789"`
+	Role				string				`bson:"role,omitempty" json:"role,omitempty" example:"admin"`
 }
 
 type JWTClaims struct {
