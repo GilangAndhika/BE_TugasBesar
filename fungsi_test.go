@@ -144,3 +144,60 @@ func TestGetAllUser(t *testing.T) {
 	data := module.GetAllUser(module.MongoConn, "user")
 	fmt.Println(data)
 }
+
+func TestInsertRole(t *testing.T){
+	role := "admin"
+	insertedID, err := module.InsertRole(module.MongoConn, "role", role)
+	if err != nil {
+		t.Errorf("Error inserting data: %v", err)
+	}
+	fmt.Printf("Data berhasil disimpan dengan ID: %v\n", insertedID.Hex())
+}
+
+func TestGetRoleFromID(t *testing.T) {
+	id := "667e684f71fbe2689d38ad23"
+	objectID, err := primitive.ObjectIDFromHex(id)
+	if err != nil {
+		t.Fatalf("Error converting id to ObjectID: %v", err)
+	}
+	role, err := module.GetRoleFromID(objectID, module.MongoConn, "role")
+	if err != nil {
+		t.Fatalf("Error calling GetRoleFromID: %v", err)
+	}
+	fmt.Println(role)
+}
+
+func TestUpdateRole(t *testing.T) {
+	id := "667e684f71fbe2689d38ad23"
+	objectID, err := primitive.ObjectIDFromHex(id)
+	if err != nil {
+		t.Fatalf("Error converting id to ObjectID: %v", err)
+	}
+	role := "user"
+	err = module.UpdateRole(objectID, module.MongoConn, "role", role)
+	if err != nil {
+		t.Fatalf("Error calling UpdateRole: %v", err)
+	}
+	fmt.Println("Data berhasil diupdate")
+}
+
+func TestDeleteRoleByID(t *testing.T) {
+	id := "667e684f71fbe2689d38ad23"
+	objectID, err := primitive.ObjectIDFromHex(id)
+	if err != nil {
+		t.Fatalf("Error converting id to ObjectID: %v", err)
+	}
+	err = module.DeleteRoleByID(objectID, module.MongoConn, "role")
+	if err != nil {
+		t.Fatalf("Error calling DeleteRole: %v", err)
+	}
+	_, err = module.GetRoleFromID(objectID, module.MongoConn, "role")
+	if err == nil {
+		t.Fatalf("Data masih ada")
+	}
+}
+
+func TestGetAllRole(t *testing.T) {
+	data := module.GetAllRole(module.MongoConn, "role")
+	fmt.Println(data)
+}
