@@ -18,19 +18,19 @@ type Parfume struct {
 }
 
 type User struct {
-	ID         primitive.ObjectID `bson:"_id,omitempty" json:"_id,omitempty" example:"123456789"`
-	Username   string             `bson:"username,omitempty" json:"username,omitempty" example:"user"`
-	Password   string             `bson:"password,omitempty" json:"password,omitempty" example:"user"`
-	Email      string             `bson:"email,omitempty" json:"email,omitempty" example:"user"`
-	Phone      string             `bson:"phone,omitempty" json:"phone,omitempty" example:"08123456789"`
-	Address    string             `bson:"address,omitempty" json:"address,omitempty" example:"Jl. Jalan"`
-	RoleID     primitive.ObjectID `bson:"role_id,omitempty" json:"role_id,omitempty" example:"123456789"`
+	ID         	primitive.ObjectID 	`bson:"_id,omitempty" json:"_id,omitempty" example:"123456789"`
+	Username   	string             	`bson:"username,omitempty" json:"username,omitempty" example:"user"`
+	Password   	string             	`bson:"password,omitempty" json:"password,omitempty" example:"user"`
+	IDrole		primitive.ObjectID	`bson:"idrole,omitempty" json:"idrole,omitempty" example:"123456789"`
+	Email      	string             	`bson:"email,omitempty" json:"email,omitempty" example:"user"`
+	Phone      	string             	`bson:"phone,omitempty" json:"phone,omitempty" example:"08123456789"`
+	Address    	string             	`bson:"address,omitempty" json:"address,omitempty" example:"Jl. Jalan"`
 }
 
 
-type Role struct {
-	ID				primitive.ObjectID  `bson:"_id,omitempty" json:"_id,omitempty" example:"123456789"`
-	Role			string				`bson:"role,omitempty" json:"role,omitempty" example:"admin"`
+type Roles struct {
+	IDrole				primitive.ObjectID  `bson:"_id,omitempty" json:"_id,omitempty" example:"123456789"`
+	Role				string				`bson:"role,omitempty" json:"role,omitempty" example:"admin"`
 }
 
 type JWTClaims struct {
