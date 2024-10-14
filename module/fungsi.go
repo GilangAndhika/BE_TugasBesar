@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/gryzlegrizz/BE_TugasBesar/model"
+	"github.com/GilangAndhika/BE_TugasBesar/model"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
