@@ -135,21 +135,21 @@ func InsertUser(db *mongo.Database, col string, username string, password string
 	return insertedID, nil
 }
 
-func GetUserFromID(_id primitive.ObjectID, db *mongo.Database, col string) (user model.User, errs error) {
+func GetUserFromID(id_user primitive.ObjectID, db *mongo.Database, col string) (user model.User, errs error) {
 	collection := db.Collection(col)
-	filter := bson.M{"_id": _id}
+	filter := bson.M{"id_user": id_user}
 	err := collection.FindOne(context.TODO(), filter).Decode(&user)
 	if err != nil {
 		if errors.Is(err, mongo.ErrNoDocuments) {
-			return user, fmt.Errorf("no data found for ID %s", _id)
+			return user, fmt.Errorf("no data found for ID %s", id_user)
 		}
-		return user, fmt.Errorf("error retrieving data for ID %s: %s", _id, err.Error())
+		return user, fmt.Errorf("error retrieving data for ID %s: %s", id_user, err.Error())
 	}
 	return user, nil
 }
 
-func UpdateUser(_id primitive.ObjectID, db *mongo.Database, col string, username string, password string, idrole primitive.ObjectID, email string, phone string, address string) (err error) {
-	filter := bson.M{"_id": _id}
+func UpdateUser(id_user primitive.ObjectID, db *mongo.Database, col string, username string, password string, idrole primitive.ObjectID, email string, phone string, address string) (err error) {
+	filter := bson.M{"id_user": id_user}
 	update := bson.M{
 		"$set": bson.M{
 			"username": username,
@@ -172,16 +172,16 @@ func UpdateUser(_id primitive.ObjectID, db *mongo.Database, col string, username
 	return nil
 }
 
-func DeleteUserByID(_id primitive.ObjectID, db *mongo.Database, col string) error {
+func DeleteUserByID(id_user primitive.ObjectID, db *mongo.Database, col string) error {
 	collection := db.Collection(col)
-	filter := bson.M{"_id": _id}
+	filter := bson.M{"id_user": id_user}
 
 	result, err := collection.DeleteOne(context.TODO(), filter)
 	if err != nil{
-		return fmt.Errorf("error deleting data for ID %s: %s", _id, err.Error())
+		return fmt.Errorf("error deleting data for ID %s: %s", id_user, err.Error())
 	}
 	if result.DeletedCount == 0	{
-		return fmt.Errorf("data with ID %s not found", _id)
+		return fmt.Errorf("data with ID %s not found", id_user)
 	}
 	return nil
 }
@@ -213,21 +213,21 @@ func InsertRole(db *mongo.Database, col string, roleUser string) (insertedID pri
 	return insertedID, nil
 }
 
-func GetRoleFromID(_id primitive.ObjectID, db *mongo.Database, col string) (role model.Roles, errs error) {
+func GetRoleFromID(id_role primitive.ObjectID, db *mongo.Database, col string) (role model.Roles, errs error) {
 	collection := db.Collection(col)
-	filter := bson.M{"_id": _id}
+	filter := bson.M{"id_role": id_role}
 	err := collection.FindOne(context.TODO(), filter).Decode(&role)
 	if err != nil {
 		if errors.Is(err, mongo.ErrNoDocuments) {
-			return role, fmt.Errorf("no data found for ID %s", _id)
+			return role, fmt.Errorf("no data found for ID %s", id_role)
 		}
-		return role, fmt.Errorf("error retrieving data for ID %s: %s", _id, err.Error())
+		return role, fmt.Errorf("error retrieving data for ID %s: %s", id_role, err.Error())
 	}
 	return role, nil
 }
 
-func UpdateRole(_id primitive.ObjectID, db *mongo.Database, col string, roleUser string) (err error) {
-	filter := bson.M{"_id": _id}
+func UpdateRole(id_role primitive.ObjectID, db *mongo.Database, col string, roleUser string) (err error) {
+	filter := bson.M{"id_role": id_role}
 	update := bson.M{
 		"$set": bson.M{
 			"role": roleUser,
@@ -245,16 +245,16 @@ func UpdateRole(_id primitive.ObjectID, db *mongo.Database, col string, roleUser
 	return nil
 }
 
-func DeleteRoleByID(_id primitive.ObjectID, db *mongo.Database, col string) error {
+func DeleteRoleByID(id_role primitive.ObjectID, db *mongo.Database, col string) error {
 	collection := db.Collection(col)
-	filter := bson.M{"_id": _id}
+	filter := bson.M{"id_role": id_role}
 
 	result, err := collection.DeleteOne(context.TODO(), filter)
 	if err != nil{
-		return fmt.Errorf("error deleting data for ID %s: %s", _id, err.Error())
+		return fmt.Errorf("error deleting data for ID %s: %s", id_role, err.Error())
 	}
 	if result.DeletedCount == 0	{
-		return fmt.Errorf("data with ID %s not found", _id)
+		return fmt.Errorf("data with ID %s not found", id_role)
 	}
 	return nil
 }
