@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/gryzlegrizz/BE_TugasBesar/model"
+	"github.com/GilangAndhika/BE_TugasBesar/model"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -199,7 +199,6 @@ func GetAllUser(db *mongo.Database, col string) (data []model.User) {
 	}
 	return
 }
-
 func InsertRole(db *mongo.Database, col string, roleUser string) (insertedID primitive.ObjectID, err error) {
 	role := bson.M{
 		"role": roleUser,

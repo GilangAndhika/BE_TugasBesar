@@ -4,20 +4,20 @@ import (
 	"fmt"
 	"testing"
 
-	// "github.com/gryzlegrizz/BE_TugasBesar/model"
-	"github.com/gryzlegrizz/BE_TugasBesar/module"
+	// "github.com/GilangAndhika/BE_TugasBesar/model"
+	"github.com/GilangAndhika/BE_TugasBesar/module"
 	"go.mongodb.org/mongo-driver/bson/primitive"
-) 
+)
 
-func TestInsertParfume(t* testing.T){
-	nama := 		"Van Persie"
-	jenis := 		"Eau de Parfum"
-	merk := 		"Chanel"
-	deskripsi := 	"Parfum yang sangat harum dan tahan lama"
-	harga :=		1500000
-	thn := 			2019
-	stok := 		100
-	ukuran := 		"50ml"
+func TestInsertParfume(t *testing.T) {
+	nama := "Van Persie"
+	jenis := "Eau de Parfum"
+	merk := "Chanel"
+	deskripsi := "Parfum yang sangat harum dan tahan lama"
+	harga := 1500000
+	thn := 2019
+	stok := 100
+	ukuran := "50ml"
 	insertedID, err := module.InsertParfume(module.MongoConn, "parfume", nama, jenis, merk, deskripsi, harga, thn, stok, ukuran)
 	if err != nil {
 		t.Errorf("Error inserting data: %v", err)
@@ -26,15 +26,15 @@ func TestInsertParfume(t* testing.T){
 }
 
 func TestGetParfumeFromID(t *testing.T) {
-    id := "66756b2bb0584a360d9709d8"
-    objectID, err := primitive.ObjectIDFromHex(id)
-    if err != nil {
-        t.Fatalf("Error converting id to ObjectID: %v", err)
-    }
-    parfume, err := module.GetParfumeFromID(objectID, module.MongoConn, "parfume")
-    if err != nil {
-        t.Fatalf("Error calling GetParfumeFromID: %v", err)
-    }
+	id := "66756b2bb0584a360d9709d8"
+	objectID, err := primitive.ObjectIDFromHex(id)
+	if err != nil {
+		t.Fatalf("Error converting id to ObjectID: %v", err)
+	}
+	parfume, err := module.GetParfumeFromID(objectID, module.MongoConn, "parfume")
+	if err != nil {
+		t.Fatalf("Error calling GetParfumeFromID: %v", err)
+	}
 	fmt.Println(parfume)
 }
 
@@ -128,7 +128,7 @@ func TestUpdateUser(t *testing.T) {
 	email := "user"
 	phone := "000000000000"
 	address := "Jl. Jalan"
-	
+
 	idrole, err := primitive.ObjectIDFromHex(idroleStr)
 	if err != nil {
 		t.Fatalf("Error converting idrole to ObjectID: %v", err)
